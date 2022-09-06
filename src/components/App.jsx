@@ -22,9 +22,18 @@ export class App extends Component {
 
     const friendId = nanoid();
 
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, { id: friendId, name, number }],
-    }));
+    const findedContact = this.state.contacts.find(contact =>
+      contact.name.toLowerCase().includes(name.toLowerCase())
+    );
+
+    if (findedContact) {
+      alert(`${name} is already in contacts`);
+      return;
+    } else {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, { id: friendId, name, number }],
+      }));
+    }
   };
 
   onFilterChange = evt => {
@@ -36,6 +45,7 @@ export class App extends Component {
     const filteredFriends = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedName)
     );
+
     return (
       <StyledContainer>
         <Title text="Phonebook" />
