@@ -1,5 +1,5 @@
-import { SearchButton } from './FormButton.styled';
+import { StyledButton } from './FormButton.styled';
 
 export const Button = ({ text }) => {
-  return <SearchButton>{text}</SearchButton>;
+  return <StyledButton>{text}</StyledButton>;
 };

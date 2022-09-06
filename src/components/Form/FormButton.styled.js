@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SearchButton = styled.button`
+export const StyledButton = styled.button`
   color: ${p => p.theme.colors.white};
   background-color: ${p => p.theme.colors.primary};
   padding: ${p => p.theme.space[3]}px ${p => p.theme.space[4]}px;

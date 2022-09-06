@@ -40,6 +40,12 @@ export class App extends Component {
     this.setState({ filter: evt.currentTarget.value });
   };
 
+  onFriendDelete = friendId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== friendId),
+    }));
+  };
+
   render() {
     const normalizedName = this.state.filter.toLowerCase();
     const filteredFriends = this.state.contacts.filter(contact =>
@@ -55,7 +61,10 @@ export class App extends Component {
           value={this.state.filter}
           onFilterChange={this.onFilterChange}
         />
-        <ContactList list={filteredFriends} />
+        <ContactList
+          list={filteredFriends}
+          onFriendDelete={this.onFriendDelete}
+        />
       </StyledContainer>
     );
   }
