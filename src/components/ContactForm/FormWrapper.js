@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FormWrapper } from './FormWrapper.styled';
-import { Form } from './Form.styled';
 import { FormTitle } from './FormTitle';
 import { SearchInput } from './SearchInput.styled';
 import { Button } from './FormButton';
@@ -16,9 +15,10 @@ export class ContactForm extends Component {
 
   render() {
     const { name, number } = this.state;
+
     return (
       <FormWrapper>
-        <Form
+        <form
           onSubmit={evt => {
             this.props.onConfirmAddFriend(evt, name, number);
             this.setState({ name: '', number: '' });
@@ -48,7 +48,7 @@ export class ContactForm extends Component {
             />
           </FormTitle>
           <Button type="submit" text="Add contact" />
-        </Form>
+        </form>
       </FormWrapper>
     );
   }

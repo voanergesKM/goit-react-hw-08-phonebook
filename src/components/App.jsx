@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { StyledContainer } from 'components/PhonebookContainer/PhonebookContainer.styled';
-import { Title } from 'components/Title/Title';
-import { ContactForm } from './Form/FormWrapper';
+import { Container } from './PhonebookContainer.styled';
+import { Title } from './Title/AppTitle';
+import { ContactForm } from './ContactForm/FormWrapper';
+import { SectionTitle } from './Title/SectionTitle';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './FriendList/FriendList';
 
@@ -53,10 +54,10 @@ export class App extends Component {
     );
 
     return (
-      <StyledContainer>
+      <Container>
         <Title text="Phonebook" />
         <ContactForm onConfirmAddFriend={this.onConfirmAddFriend} />
-        <Title text="Contacts" />
+        <SectionTitle text="Contacts" />
         <Filter
           value={this.state.filter}
           onFilterChange={this.onFilterChange}
@@ -65,7 +66,7 @@ export class App extends Component {
           list={filteredFriends}
           onFriendDelete={this.onFriendDelete}
         />
-      </StyledContainer>
+      </Container>
     );
   }
 }

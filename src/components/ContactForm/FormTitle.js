@@ -1,10 +1,10 @@
-import { StyledFormTitle } from './FormTitle.styled';
+import { StyledInputTitle } from './FormTitle.styled';
 
 export const FormTitle = ({ title, children }) => {
   return (
-    <StyledFormTitle>
+    <StyledInputTitle>
       {title}
       {children}
-    </StyledFormTitle>
+    </StyledInputTitle>
   );
 };

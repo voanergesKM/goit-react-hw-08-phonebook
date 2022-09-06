@@ -1,5 +1,6 @@
-import { SearchInput } from 'components/Form/SearchInput.styled';
-import { FormTitle } from 'components/Form/FormTitle';
+import PropTypes from 'prop-types';
+import { SearchInput } from 'components/ContactForm/SearchInput.styled';
+import { FormTitle } from 'components/ContactForm/FormTitle';
 
 export const Filter = ({ value, onFilterChange }) => {
   return (
@@ -12,4 +13,9 @@ export const Filter = ({ value, onFilterChange }) => {
       />
     </FormTitle>
   );
+};
+
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
 };
