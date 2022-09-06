@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FormWrapper } from './FormWrapper.styled';
 import { FormTitle } from './FormTitle';
 import { SearchInput } from './SearchInput.styled';
@@ -53,3 +54,7 @@ export class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  onConfirmAddFriend: PropTypes.func.isRequired,
+};
