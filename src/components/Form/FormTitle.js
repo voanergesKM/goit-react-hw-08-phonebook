@@ -1,5 +1,10 @@
 import { StyledFormTitle } from './FormTitle.styled';
 
-export const FormTitle = ({ title }) => {
-  return <StyledFormTitle>{title}</StyledFormTitle>;
+export const FormTitle = ({ title, children }) => {
+  return (
+    <StyledFormTitle>
+      {title}
+      {children}
+    </StyledFormTitle>
+  );
 };
