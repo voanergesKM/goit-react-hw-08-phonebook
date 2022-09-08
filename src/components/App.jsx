@@ -7,6 +7,8 @@ import { SectionTitle } from './Title/SectionTitle';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './FriendList/FriendList';
 
+const LOKAL_KEY = 'my-contacts';
+
 export class App extends Component {
   state = {
     contacts: [
@@ -17,6 +19,22 @@ export class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const friends = JSON.parse(localStorage.getItem(LOKAL_KEY));
+
+    if (friends) {
+      this.setState(prev => ({
+        contacts: friends,
+      }));
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contact !== this.state.contacts) {
+      localStorage.setItem(LOKAL_KEY, JSON.stringify(this.state.contacts));
+    }
+  }
 
   onConfirmAddFriend = (evt, name, number) => {
     evt.preventDefault();

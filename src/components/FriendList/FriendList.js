@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { StyledList } from './FriendList.styled';
 import { FriendItem } from './FriendItem';
-import { StyledButton } from 'components/ContactForm/FormButton.styled';
+import { StyledButton } from 'components/Button/Button.styled';
 import { FriendDescription } from './FriendItem.styled';
 
 export const ContactList = ({ list, onFriendDelete }) => {

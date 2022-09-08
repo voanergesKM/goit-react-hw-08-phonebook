@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormWrapper } from './FormWrapper.styled';
 import { FormTitle } from './FormTitle';
 import { SearchInput } from './SearchInput.styled';
-import { Button } from './FormButton';
+import { Button } from '../Button/Button';
 
 export class ContactForm extends Component {
   state = { name: '', number: '' };
