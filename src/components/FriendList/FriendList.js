@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { StyledList } from './FriendList.styled';
 import { FriendItem } from './FriendItem';
-import { StyledButton } from 'components/Button/Button.styled';
 import { FriendDescription } from './FriendItem.styled';
+import { Button } from 'components/Button/Button';
 
 export const ContactList = ({ list, onFriendDelete }) => {
   return (
@@ -12,9 +12,11 @@ export const ContactList = ({ list, onFriendDelete }) => {
           <FriendDescription>
             {name}: {number}
           </FriendDescription>
-          <StyledButton type="button" onClick={() => onFriendDelete(id)}>
-            Delete
-          </StyledButton>
+          <Button
+            type="button"
+            onClick={() => onFriendDelete(id)}
+            text="Delete"
+          />
         </FriendItem>
       ))}
     </StyledList>
