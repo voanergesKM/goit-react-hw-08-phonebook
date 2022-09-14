@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { Container } from './PhonebookContainer.styled';
 import { Title } from './Title/AppTitle';
@@ -9,39 +9,27 @@ import { ContactList } from './FriendList/FriendList';
 
 const LOKAL_KEY = 'my-contacts';
 
-export class App extends Component {
-  state = {
-    contacts: [
+export const App = () => {
+  const [contacts, setContacts] = useState(
+    JSON.parse(window.localStorage.getItem(LOKAL_KEY)) ?? [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
-    filter: '',
-  };
+    ]
+  );
+  const [filter, setFilter] = useState('');
 
-  componentDidMount() {
-    const friends = JSON.parse(localStorage.getItem(LOKAL_KEY));
+  useEffect(() => {
+    window.localStorage.setItem(LOKAL_KEY, JSON.stringify(contacts));
+  }, [contacts]);
 
-    if (friends) {
-      this.setState(prev => ({
-        contacts: friends,
-      }));
-    }
-  }
-
-  componentDidUpdate(_, prevState) {
-    if (prevState.contact !== this.state.contacts) {
-      localStorage.setItem(LOKAL_KEY, JSON.stringify(this.state.contacts));
-    }
-  }
-
-  onConfirmAddFriend = (evt, name, number) => {
+  const onConfirmAddFriend = (evt, name, number) => {
     evt.preventDefault();
 
     const friendId = nanoid();
 
-    const findedContact = this.state.contacts.find(contact =>
+    const findedContact = contacts.find(contact =>
       contact.name.toLowerCase().includes(name.toLowerCase())
     );
 
@@ -49,42 +37,30 @@ export class App extends Component {
       alert(`${name} is already in contacts`);
       return;
     } else {
-      this.setState(prevState => ({
-        contacts: [...prevState.contacts, { id: friendId, name, number }],
-      }));
+      setContacts([...contacts, { id: friendId, name, number }]);
     }
   };
 
-  onFilterChange = evt => {
-    this.setState({ filter: evt.currentTarget.value });
+  const onFriendDelete = friendId => {
+    setContacts(contacts.filter(contact => contact.id !== friendId));
   };
 
-  onFriendDelete = friendId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== friendId),
-    }));
-  };
+  const normalizedName = filter.toLowerCase();
 
-  render() {
-    const normalizedName = this.state.filter.toLowerCase();
-    const filteredFriends = this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedName)
-    );
+  const filteredFriends = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedName)
+  );
 
-    return (
-      <Container>
-        <Title text="Phonebook" />
-        <ContactForm onConfirmAddFriend={this.onConfirmAddFriend} />
-        <SectionTitle text="Contacts" />
-        <Filter
-          value={this.state.filter}
-          onFilterChange={this.onFilterChange}
-        />
-        <ContactList
-          list={filteredFriends}
-          onFriendDelete={this.onFriendDelete}
-        />
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <Title text="Phonebook" />
+      <ContactForm onConfirmAddFriend={onConfirmAddFriend} />
+      <SectionTitle text="Contacts" />
+      <Filter
+        value={filter}
+        onFilterChange={evt => setFilter(evt.currentTarget.value)}
+      />
+      <ContactList list={filteredFriends} onFriendDelete={onFriendDelete} />
+    </Container>
+  );
+};
