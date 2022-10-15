@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
-import { Container } from './PhonebookContainer.styled';
 import { Title } from './Title/AppTitle';
 import { ContactForm } from './ContactForm/FormWrapper';
 import { SectionTitle } from './Title/SectionTitle';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './FriendList/FriendList';
+import { Box } from './Box';
 
 const LOKAL_KEY = 'my-contacts';
 
@@ -52,7 +52,7 @@ export const App = () => {
   );
 
   return (
-    <Container>
+    <Box maxWidth="1000px" my={0} mx="auto">
       <Title text="Phonebook" />
       <ContactForm onConfirmAddFriend={onConfirmAddFriend} />
       <SectionTitle text="Contacts" />
@@ -61,6 +61,6 @@ export const App = () => {
         onFilterChange={evt => setFilter(evt.currentTarget.value)}
       />
       <ContactList list={filteredFriends} onFriendDelete={onFriendDelete} />
-    </Container>
+    </Box>
   );
 };
