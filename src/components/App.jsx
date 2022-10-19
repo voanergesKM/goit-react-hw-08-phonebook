@@ -24,9 +24,7 @@ export const App = () => {
     window.localStorage.setItem(LOKAL_KEY, JSON.stringify(contacts));
   }, [contacts]);
 
-  const onConfirmAddFriend = (evt, name, number) => {
-    evt.preventDefault();
-
+  const onConfirmAddFriend = ({ name, number }, { resetForm }) => {
     const friendId = nanoid();
 
     const findedContact = contacts.find(contact =>
@@ -39,6 +37,8 @@ export const App = () => {
     } else {
       setContacts([...contacts, { id: friendId, name, number }]);
     }
+
+    resetForm();
   };
 
   const onFriendDelete = friendId => {
@@ -52,7 +52,7 @@ export const App = () => {
   );
 
   return (
-    <Box maxWidth="1000px" my={0} mx="auto">
+    <Box maxWidth="1000px" my={0} mx="auto" px={4}>
       <Title text="Phonebook" />
       <ContactForm onConfirmAddFriend={onConfirmAddFriend} />
       <SectionTitle text="Contacts" />
