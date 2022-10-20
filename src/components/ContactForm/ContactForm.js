@@ -1,11 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+
 import { Box } from 'components/Box';
 import { FormTitle } from './FormTitle';
 import { Button } from 'components/Button/Button';
 import { Error, Input } from './SearchInput.styled';
+import { addContact } from 'redux/contactsSlice';
 
 const initialValues = {
   name: '',
@@ -19,12 +21,17 @@ const schema = Yup.object().shape({
   ),
 });
 
-export const ContactForm = ({ onConfirmAddFriend }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+
   return (
     <Box p={4} border="normal" maxWidth="400px" mb={5}>
       <Formik
         initialValues={initialValues}
-        onSubmit={onConfirmAddFriend}
+        onSubmit={(values, actions) => {
+          dispatch(addContact(values, actions));
+          actions.resetForm();
+        }}
         validationSchema={schema}
       >
         <Form>
@@ -41,8 +48,4 @@ export const ContactForm = ({ onConfirmAddFriend }) => {
       </Formik>
     </Box>
   );
-};
-
-ContactForm.propTypes = {
-  onConfirmAddFriend: PropTypes.func.isRequired,
 };

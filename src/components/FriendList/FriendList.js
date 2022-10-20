@@ -1,35 +1,29 @@
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { StyledList } from './FriendList.styled';
 import { FriendItem } from './FriendItem';
 import { FriendDescription } from './FriendItem.styled';
 import { Button } from 'components/Button/Button';
+import { deleteContact } from 'redux/contactsSlice';
 
-export const ContactList = ({ list, onFriendDelete }) => {
+export const ContactList = () => {
+  const contactList = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
   return (
     <StyledList>
-      {list.map(({ id, name, number }) => (
+      {contactList.map(({ id, name, number }) => (
         <FriendItem key={id}>
           <FriendDescription>
             {name}: {number}
           </FriendDescription>
           <Button
             type="button"
-            onClick={() => onFriendDelete(id)}
+            onClick={() => dispatch(deleteContact(id))}
             text="Delete"
           />
         </FriendItem>
       ))}
     </StyledList>
   );
-};
-
-ContactList.propTypes = {
-  list: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  onFriendDelete: PropTypes.func.isRequired,
 };
