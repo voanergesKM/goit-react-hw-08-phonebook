@@ -4,6 +4,7 @@ import { SectionTitle } from './Title/SectionTitle';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './FriendList/FriendList';
 import { Box } from './Box';
+import { ToastContainer } from 'react-toastify';
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
       <SectionTitle text="Contacts" />
       <Filter />
       <ContactList />
+      <ToastContainer />
     </Box>
   );
 };
