@@ -7,7 +7,7 @@ import { Button } from 'components/Button/Button';
 import { deleteContact } from 'redux/contactsSlice';
 
 export const ContactList = () => {
-  const contactList = useSelector(state => state.contacts);
+  const contactList = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
