@@ -1,86 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchContacts, addContact, deleteContact } from './contactsOperations';
 
-export const contactsSlice = createSlice({
-  name: 'contacts',
-  initialState: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
-  reducers: {},
-
-  extraReducers: {
-    [fetchContacts.fulfilled]: (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        items: action.payload,
-      };
-    },
-
-    [fetchContacts.pending]: state => {
-      return {
-        ...state,
-        isLoading: true,
-        error: null,
-      };
-    },
-
-    [fetchContacts.rejected]: (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-    },
-
-    [addContact.pending]: state => {
-      return {
-        ...state,
-        isLoading: true,
-      };
-    },
-
-    [addContact.fulfilled]: (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        items: [...state.items, action.payload],
-        error: null,
-      };
-    },
-
-    [addContact.rejected]: (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-    },
-
-    [deleteContact.pending]: state => {
-      return {
-        ...state,
-        isLoading: true,
-      };
-    },
-
-    [deleteContact.fulfilled]: (state, action) => {
-      return {
-        items: state.items.filter(({ id }) => id !== action.payload.id),
-        isLoading: false,
-        error: null,
-      };
-    },
-
-    [deleteContact.rejected]: (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-    },
-  },
+export const contactsApi = createApi({
+  reducerPath: 'contactsApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://63595187ff3d7bddb99f3935.mockapi.io/api/v1',
+  }),
+  tagTypes: ['Contacts'],
+  endpoints: builder => ({
+    getContacts: builder.query({
+      query: () => `/contacts`,
+      providesTags: ['Contacts'],
+    }),
+    addContact: builder.mutation({
+      query: data => ({
+        url: `/contacts`,
+        method: 'post',
+        body: data,
+      }),
+      invalidatesTags: ['Contacts'],
+    }),
+    removeContact: builder.mutation({
+      query: id => ({
+        url: `/contacts/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Contacts'],
+    }),
+  }),
 });
+
+export const {
+  useGetContactsQuery,
+  useAddContactMutation,
+  useRemoveContactMutation,
+} = contactsApi;
