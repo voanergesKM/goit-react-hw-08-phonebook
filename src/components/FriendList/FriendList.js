@@ -4,7 +4,10 @@ import { StyledList } from './FriendList.styled';
 import { FriendItem } from './FriendItem';
 import { FriendDescription } from './FriendItem.styled';
 import { Button } from 'components/Button/Button';
-import { fetchContacts, deleteContact } from 'redux/contactsOperations';
+import {
+  fetchContacts,
+  deleteContact,
+} from 'redux/contacts/contactsOperations';
 import { useEffect } from 'react';
 import { onDeleteContact } from 'utils/notify';
 

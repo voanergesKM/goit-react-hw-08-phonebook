@@ -1,7 +1,7 @@
 import { SearchInput } from 'components/ContactForm/SearchInput.styled';
 import { FormTitle } from 'components/ContactForm/FormTitle';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterChange } from 'redux/filterSlice';
+import { filterChange } from 'redux/filter/filterSlice';
 
 export const Filter = () => {
   const value = useSelector(state => state.filter);

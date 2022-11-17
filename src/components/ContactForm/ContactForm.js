@@ -7,7 +7,7 @@ import { Box } from 'components/Box';
 import { FormTitle } from './FormTitle';
 import { Button } from 'components/Button/Button';
 import { Error, Input } from './SearchInput.styled';
-import { addContact } from 'redux/contactsOperations';
+import { addContact } from 'redux/contacts/contactsOperations';
 import { onExistContact, onSuccesAddContact } from 'utils/notify';
 
 const initialValues = {
