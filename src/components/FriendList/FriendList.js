@@ -2,20 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { StyledList } from './FriendList.styled';
 import { FriendItem } from './FriendItem';
-import { FriendDescription } from './FriendItem.styled';
-import { Button } from 'components/Button/Button';
-import {
-  fetchContacts,
-  deleteContact,
-} from 'redux/contacts/contactsOperations';
-import { useEffect, useState } from 'react';
-import { onDeleteContact } from 'utils/notify';
-import { Box } from 'components/Box';
-import { FriendEditor } from 'components/FriendEdit/FriendEdit';
+import { fetchContacts } from 'redux/contacts/contactsOperations';
+import { useEffect } from 'react';
 
 export const ContactList = () => {
-  const [isEditOpen, setIsEditOpen] = useState(false);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
