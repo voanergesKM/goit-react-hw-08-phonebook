@@ -12,12 +12,12 @@ import { onExistContact, onSuccesAddContact } from 'utils/notify';
 
 const initialValues = {
   name: '',
-  phone: '',
+  number: '',
 };
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
-  phone: Yup.string('Phone number must be a "Number" type').required(
+  number: Yup.string('Phone number must be a "Number" type').required(
     'Please, enter valid Phone Number'
   ),
 });
@@ -52,9 +52,9 @@ export const ContactForm = () => {
             <Input type="text" name="name" />
             <ErrorMessage name="name" component={Error} />
           </FormTitle>
-          <FormTitle title="Number" htmlFor="phone">
-            <Input type="tel" name="phone" />
-            <ErrorMessage name="phone" component={Error} />
+          <FormTitle title="Number" htmlFor="number">
+            <Input type="tel" name="number" />
+            <ErrorMessage name="number" component={Error} />
           </FormTitle>
           <Button type="submit" text="Add contact" />
         </Form>

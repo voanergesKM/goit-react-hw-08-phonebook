@@ -27,10 +27,10 @@ export const ContactList = () => {
 
   return (
     <StyledList>
-      {filteredContacts.map(({ id, name, phone }) => (
+      {filteredContacts.map(({ id, name, number }) => (
         <FriendItem key={id}>
           <FriendDescription>
-            {name}: {phone}
+            {name}: {number}
           </FriendDescription>
           <Button
             type="button"

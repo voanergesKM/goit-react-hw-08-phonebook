@@ -3,6 +3,8 @@ import { Button } from 'components/Button/Button';
 import { FormTitle } from 'components/ContactForm/FormTitle';
 import { Error, Input } from 'components/ContactForm/SearchInput.styled';
 import { ErrorMessage, Form, Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { loginUser } from 'redux/auth/authOperations';
 import * as Yup from 'yup';
 
 const initialValues = {
@@ -19,11 +21,15 @@ const schema = Yup.object().shape({
 });
 
 export const Login = () => {
+  const dispatch = useDispatch();
   return (
-    <Box p={4} border="normal" maxWidth="400px" mb={5}>
+    <Box p={4} border="normal" maxWidth="400px" mb={5} mx="auto">
       <Formik
         initialValues={initialValues}
-        onSubmit={(values, actions) => null}
+        onSubmit={(values, actions) => {
+          dispatch(loginUser(values));
+          actions.resetForm();
+        }}
         validationSchema={schema}
       >
         <Form>
