@@ -8,10 +8,14 @@ import {
   fetchContacts,
   deleteContact,
 } from 'redux/contacts/contactsOperations';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { onDeleteContact } from 'utils/notify';
+import { Box } from 'components/Box';
+import { FriendEditor } from 'components/FriendEdit/FriendEdit';
 
 export const ContactList = () => {
+  const [isEditOpen, setIsEditOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,19 +32,7 @@ export const ContactList = () => {
   return (
     <StyledList>
       {filteredContacts.map(({ id, name, number }) => (
-        <FriendItem key={id}>
-          <FriendDescription>
-            {name}: {number}
-          </FriendDescription>
-          <Button
-            type="button"
-            onClick={() => {
-              onDeleteContact(name);
-              dispatch(deleteContact(id));
-            }}
-            text="Delete"
-          />
-        </FriendItem>
+        <FriendItem key={id} id={id} name={name} number={number} />
       ))}
     </StyledList>
   );

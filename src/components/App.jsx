@@ -12,7 +12,7 @@ import { RestrictedRoute } from './RestrictedRoute';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(state => state.auth.isRefreshing);
+  const { isRefreshing, isLoggedIn } = useSelector(state => state.auth);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -22,7 +22,7 @@ export const App = () => {
     !isRefreshing && (
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<WelcomePage />} />
+          {!isLoggedIn && <Route index element={<WelcomePage />} />}
           <Route
             path="/contacts"
             element={<PrivateRoute component={Contacts} redirectTo="/login" />}

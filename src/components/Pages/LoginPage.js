@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
 export const Login = () => {
   const dispatch = useDispatch();
   return (
-    <Box p={4} border="normal" maxWidth="400px" mb={5} mx="auto">
+    <Box p={4} border="normal" maxWidth="400px" mb={5} mx="auto" as={'main'}>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {

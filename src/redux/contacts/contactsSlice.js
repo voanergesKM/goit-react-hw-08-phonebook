@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchContacts, addContact, deleteContact } from './contactsOperations';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  editContact,
+} from './contactsOperations';
 
 export const contactsSlice = createSlice({
   name: 'contacts',
@@ -81,6 +86,16 @@ export const contactsSlice = createSlice({
         isLoading: false,
         error: action.payload,
       };
+    },
+
+    [editContact.fulfilled]: (state, action) => {
+      state.items.map(item => {
+        if (item.id === action.payload.data.id) {
+          item.name = action.payload.data.name;
+          item.number = action.payload.data.number;
+        }
+        return item;
+      });
     },
   },
 });
