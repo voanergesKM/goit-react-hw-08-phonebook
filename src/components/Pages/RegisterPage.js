@@ -1,8 +1,7 @@
-import { Box } from 'components/Box';
-import { Button } from 'components/Button/Button';
-import { FormTitle } from 'components/ContactForm/FormTitle';
-import { Error, Input } from 'components/ContactForm/SearchInput.styled';
-import { ErrorMessage, Form, Formik } from 'formik';
+import { AppRegistration } from '@mui/icons-material';
+import { Button, TextField } from '@mui/material';
+import { Box } from '@mui/system';
+import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { signupUser } from 'redux/auth/authOperations';
 import * as Yup from 'yup';
@@ -13,7 +12,7 @@ const initialValues = {
   password: '',
 };
 
-const schema = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().required(),
   password: Yup.string()
@@ -24,32 +23,77 @@ const schema = Yup.object().shape({
 
 export const Register = () => {
   const dispatch = useDispatch();
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values, actions) => {
+      dispatch(signupUser(values));
+      actions.resetForm();
+    },
+  });
+
   return (
-    <Box p={4} border="normal" maxWidth="400px" mb={5} mx="auto" as={'main'}>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values, actions) => {
-          dispatch(signupUser(values));
-          actions.resetForm();
+    <main>
+      <Box
+        p={4}
+        mb={5}
+        mx="auto"
+        sx={{
+          maxWidth: '400px',
+          boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
         }}
-        validationSchema={schema}
       >
-        <Form>
-          <FormTitle title="Name" htmlFor="name">
-            <Input type="text" name="name" />
-            <ErrorMessage name="name" component={Error} />
-          </FormTitle>
-          <FormTitle title="E-mail" htmlFor="email">
-            <Input type="email" name="email" />
-            <ErrorMessage name="email" component={Error} />
-          </FormTitle>
-          <FormTitle title="Password" htmlFor="password">
-            <Input type="password" name="password" />
-            <ErrorMessage name="password" component={Error} />
-          </FormTitle>
-          <Button type="submit" text="Register" />
-        </Form>
-      </Formik>
-    </Box>
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            id="name"
+            name="name"
+            label="Name"
+            type="text"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+            sx={{ mb: 4 }}
+          />
+
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="E-mail"
+            type="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+            sx={{ mb: 4 }}
+          />
+
+          <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+            sx={{ mb: 5 }}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            endIcon={<AppRegistration />}
+            sx={{ mx: 'auto', display: 'flex' }}
+          >
+            Register
+          </Button>
+        </form>
+      </Box>
+    </main>
   );
 };

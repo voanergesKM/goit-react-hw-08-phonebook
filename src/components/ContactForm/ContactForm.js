@@ -4,11 +4,12 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import { Box } from 'components/Box';
-import { FormTitle } from './FormTitle';
+// import { FormTitle } from './FormTitle';
 import { Button } from 'components/Button/Button';
 import { Error, Input } from './SearchInput.styled';
 import { addContact } from 'redux/contacts/contactsOperations';
 import { onExistContact, onSuccesAddContact } from 'utils/notify';
+import { Typography } from '@mui/material';
 
 const initialValues = {
   name: '',
@@ -48,14 +49,14 @@ export const ContactForm = () => {
         validationSchema={schema}
       >
         <Form>
-          <FormTitle title="Name" htmlFor="name">
+          <Typography title="Name" htmlFor="name">
             <Input type="text" name="name" />
             <ErrorMessage name="name" component={Error} />
-          </FormTitle>
-          <FormTitle title="Number" htmlFor="number">
+          </Typography>
+          <Typography title="Number" htmlFor="number">
             <Input type="tel" name="number" />
             <ErrorMessage name="number" component={Error} />
-          </FormTitle>
+          </Typography>
           <Button type="submit" text="Add contact" />
         </Form>
       </Formik>
