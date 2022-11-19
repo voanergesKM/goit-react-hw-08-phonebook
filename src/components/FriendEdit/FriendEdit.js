@@ -73,6 +73,8 @@ export const FriendEditor = ({ onToggle, id, name, number }) => {
 };
 
 FriendEditor.propTypes = {
-  children: PropTypes.node,
   onToggle: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 };

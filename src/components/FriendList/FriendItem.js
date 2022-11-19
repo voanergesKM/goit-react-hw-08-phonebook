@@ -1,7 +1,7 @@
 import { Box } from 'components/Box';
 import { Button } from 'components/Button/Button';
 import { FriendEditor } from 'components/FriendEdit/FriendEdit';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contacts/contactsOperations';
@@ -41,6 +41,8 @@ export const FriendItem = ({ id, name, number }) => {
   );
 };
 
-// FriendItem.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
+FriendItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+};
