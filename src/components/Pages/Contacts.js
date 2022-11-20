@@ -1,5 +1,4 @@
 import { Box } from 'components/Box';
-import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/FriendList/FriendList';
 import { Title } from 'components/Title/AppTitle';
@@ -10,7 +9,6 @@ export const Contacts = () => {
   return (
     <Box my={0} mx="auto" px={4} as="main">
       <Title text="Phonebook" />
-      <ContactForm />
       <SectionTitle text="Contacts" />
       <Filter />
       <ContactList />

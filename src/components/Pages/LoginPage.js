@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, Container, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
@@ -31,52 +31,54 @@ export const Login = () => {
   });
   return (
     <main>
-      <Box
-        p={4}
-        mb={5}
-        mx="auto"
-        sx={{
-          maxWidth: '400px',
-          boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-        }}
-      >
-        <form onSubmit={formik.handleSubmit}>
-          <TextField
-            fullWidth
-            id="email"
-            name="email"
-            label="E-mail"
-            type="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-            sx={{ mb: 4 }}
-          />
+      <Container>
+        <Box
+          p={4}
+          mb={5}
+          mx="auto"
+          sx={{
+            maxWidth: '400px',
+            boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+          }}
+        >
+          <form onSubmit={formik.handleSubmit}>
+            <TextField
+              fullWidth
+              id="email"
+              name="email"
+              label="E-mail"
+              type="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              sx={{ mb: 4 }}
+            />
 
-          <TextField
-            fullWidth
-            id="password"
-            name="password"
-            label="Password"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-            sx={{ mb: 5 }}
-          />
+            <TextField
+              fullWidth
+              id="password"
+              name="password"
+              label="Password"
+              type="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              sx={{ mb: 5 }}
+            />
 
-          <Button
-            type="submit"
-            variant="contained"
-            endIcon={<LoginOutlined />}
-            sx={{ mx: 'auto', display: 'flex' }}
-          >
-            Log In
-          </Button>
-        </form>
-      </Box>
+            <Button
+              type="submit"
+              variant="contained"
+              endIcon={<LoginOutlined />}
+              sx={{ mx: 'auto', display: 'flex' }}
+            >
+              Log In
+            </Button>
+          </form>
+        </Box>
+      </Container>
     </main>
   );
 };

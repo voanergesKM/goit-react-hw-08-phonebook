@@ -1,17 +1,32 @@
-import { Box } from 'components/Box';
+import { AppBar, Box, Toolbar } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { AuthNav } from './Auth';
 import { UserMenu } from './UserMenu';
 
-export const AppBar = () => {
+export const NavBar = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
-    <Box as="header" px={4} py={4} margin="0 auto" display="flex">
-      {isLoggedIn && <NavLink to={'/contacts'}>My contacts</NavLink>}
-
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
+    <Box sx={{ flexGrow: 1 }} mb={4}>
+      <AppBar
+        position="static"
+        sx={{
+          maxWidth: '1200px',
+        }}
+      >
+        <Toolbar
+          sx={{
+            width: '100%',
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          {isLoggedIn ? <UserMenu /> : <AuthNav />}
+        </Toolbar>
+      </AppBar>
     </Box>
   );
 };
