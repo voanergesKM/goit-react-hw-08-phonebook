@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { AuthNav } from './Auth';
 import { UserMenu } from './UserMenu';
@@ -7,11 +7,11 @@ export const NavBar = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
-    <Box sx={{ flexGrow: 1 }} mb={4}>
+    <Box sx={{ flexGrow: 1, maxWidth: '1400px' }}>
       <AppBar
         position="static"
         sx={{
-          maxWidth: '1200px',
+          maxWidth: '1400px',
         }}
       >
         <Toolbar
@@ -21,9 +21,11 @@ export const NavBar = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'row',
-            justifyContent: 'space-between',
           }}
         >
+          <Typography variant="h6" component="span" mr={5}>
+            MyPhonebook
+          </Typography>
           {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </Toolbar>
       </AppBar>

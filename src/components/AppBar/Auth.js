@@ -15,7 +15,7 @@ const navLinkStyle = {
 
 export const AuthNav = () => {
   return (
-    <Box mx="auto" display="flex">
+    <Box ml="auto" display="flex">
       <Button
         variant="text"
         component={NavLink}

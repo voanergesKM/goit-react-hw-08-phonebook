@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { Box } from 'components/Box';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/FriendList/FriendList';
@@ -8,8 +9,8 @@ import { ToastContainer } from 'react-toastify';
 export const Contacts = () => {
   return (
     <Box my={0} mx="auto" px={4} as="main">
-      <Title text="Phonebook" />
-      <SectionTitle text="Contacts" />
+      <Typography text="Phonebook" />
+      <Typography text="Contacts" />
       <Filter />
       <ContactList />
       <ToastContainer />

@@ -1,5 +1,5 @@
-import { Box } from 'components/Box';
-import { Button } from 'components/Button/Button';
+import { ModeEdit, PersonRemove } from '@mui/icons-material';
+import { Box, IconButton, ListItem, Typography } from '@mui/material';
 import { FriendEditor } from 'components/FriendEdit/FriendEdit';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -7,27 +7,33 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contacts/contactsOperations';
 import { onDeleteContact } from 'utils/notify';
 
-import { FriendDescription, StyledFrendItem } from './FriendItem.styled';
-
 export const FriendItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   return (
-    <StyledFrendItem>
-      <FriendDescription>
+    <ListItem>
+      <Typography variant="h5" component="p" sx={{ flexGrow: 1 }}>
         {name}: {number}
-      </FriendDescription>
+      </Typography>
       <Box display="flex">
-        <Button
+        <IconButton
+          type="button"
+          onClick={() => setIsEditOpen(true)}
+          color="inherit"
+        >
+          <ModeEdit />
+        </IconButton>
+        <IconButton
           type="button"
           onClick={() => {
             onDeleteContact(name);
             dispatch(deleteContact(id));
           }}
-          text="Delete"
-        />
-        <Button type="button" onClick={() => setIsEditOpen(true)} text="Edit" />
+          color="inherit"
+        >
+          <PersonRemove />
+        </IconButton>
       </Box>
       {isEditOpen && (
         <FriendEditor
@@ -37,7 +43,7 @@ export const FriendItem = ({ id, name, number }) => {
           onToggle={() => setIsEditOpen(false)}
         />
       )}
-    </StyledFrendItem>
+    </ListItem>
   );
 };
 

@@ -25,7 +25,14 @@ export const UserMenu = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <Box display="flex" marginLeft="auto" alignItems="center">
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+      }}
+    >
       <NavLink to={'/contacts'}>My contacts</NavLink>
       <Button
         variant="text"
@@ -35,13 +42,15 @@ export const UserMenu = () => {
         Add Contact
       </Button>
 
-      <Typography mr={3} variant="h6" component="span">
-        Welcome, {name}
-      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Typography mr={3} variant="h6" component="span">
+          Welcome, {name}
+        </Typography>
 
-      <IconButton onClick={() => dispatch(logoutUser())} color="inherit">
-        <LogoutIcon />
-      </IconButton>
+        <IconButton onClick={() => dispatch(logoutUser())} color="inherit">
+          <LogoutIcon />
+        </IconButton>
+      </Box>
 
       <AddContact
         isDrawerOpen={isDrawerOpen}
