@@ -1,10 +1,10 @@
 import { ModeEdit, PersonRemove } from '@mui/icons-material';
 import { Box, IconButton, ListItem, Typography } from '@mui/material';
-import { FriendEditor } from 'components/FriendEdit/FriendEdit';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contacts/contactsOperations';
+import { FriendEditor } from 'components/FriendEdit/FriendEdit';
 import { onDeleteContact } from 'utils/notify';
 
 export const FriendItem = ({ id, name, number }) => {
@@ -13,9 +13,14 @@ export const FriendItem = ({ id, name, number }) => {
 
   return (
     <ListItem>
-      <Typography variant="h5" component="p" sx={{ flexGrow: 1 }}>
-        {name}: {number}
-      </Typography>
+      <Box maxWidth={'400px'}>
+        <Typography variant="h5" component="p">
+          {name}:
+        </Typography>
+        <Typography variant="h5" component="span">
+          {number}
+        </Typography>
+      </Box>
       <Box display="flex">
         <IconButton
           type="button"

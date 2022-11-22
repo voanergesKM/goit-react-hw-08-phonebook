@@ -1,22 +1,22 @@
-import { Box, Button, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Link, Typography } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from 'redux/auth/authOperations';
-import { NavLink } from 'react-router-dom';
+import { Link as NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { AddContact } from 'components/ContactForm/AddContact';
 
-const navLinkStyle = {
-  color: 'text.secondary',
-  marginRight: 4,
-  '&:hover': {
-    color: 'text.primary',
-  },
+// const navLinkStyle = {
+//   color: 'text.secondary',
+//   marginRight: 4,
+//   '&:hover': {
+//     color: 'text.primary',
+//   },
 
-  '&.active': {
-    color: 'white',
-  },
-};
+//   '&.active': {
+//     color: 'white',
+//   },
+// };
 
 export const UserMenu = () => {
   const name = useSelector(state => state.auth.user.name);
@@ -33,14 +33,21 @@ export const UserMenu = () => {
         width: '100%',
       }}
     >
-      <NavLink to={'/contacts'}>My contacts</NavLink>
-      <Button
-        variant="text"
-        sx={navLinkStyle}
-        onClick={() => setIsDrawerOpen(true)}
-      >
-        Add Contact
-      </Button>
+      <Box sx={{ display: 'flex', gap: 4 }}>
+        <Link
+          component={NavLink}
+          to={'/contacts'}
+          sx={{ color: 'inherit', textDecoration: 'none' }}
+        >
+          My Contacts
+        </Link>
+        <Link
+          sx={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}
+          onClick={() => setIsDrawerOpen(true)}
+        >
+          Add Contact
+        </Link>
+      </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Typography mr={3} variant="h6" component="span">

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { addContact } from 'redux/contacts/contactsOperations';
 import { onExistContact, onSuccesAddContact } from 'utils/notify';
 import { Box, Button, TextField } from '@mui/material';
+import { PersonAdd } from '@mui/icons-material';
 
 const initialValues = {
   name: '',
@@ -80,6 +81,7 @@ export const ContactForm = () => {
         <Button
           variant="contained"
           type="submit"
+          endIcon={<PersonAdd />}
           sx={{
             display: 'flex',
             mx: 'auto',

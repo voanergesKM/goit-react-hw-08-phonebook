@@ -1,19 +1,28 @@
-import { Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { TextField } from '@mui/material';
+import { Container } from '@mui/system';
 import { Box } from 'components/Box';
-import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/FriendList/FriendList';
-import { Title } from 'components/Title/AppTitle';
-import { SectionTitle } from 'components/Title/SectionTitle';
 import { ToastContainer } from 'react-toastify';
+import { filterChange } from 'redux/filter/filterSlice';
 
 export const Contacts = () => {
+  const dispatch = useDispatch();
+  const value = useSelector(state => state.filter);
+
   return (
-    <Box my={0} mx="auto" px={4} as="main">
-      <Typography text="Phonebook" />
-      <Typography text="Contacts" />
-      <Filter />
-      <ContactList />
-      <ToastContainer />
-    </Box>
+    <Container>
+      <Box as={'main'} pt={4} maxWidth="800px" mx="auto">
+        <TextField
+          fullWidth
+          type="search"
+          name="filter"
+          value={value}
+          onChange={evt => dispatch(filterChange(evt.currentTarget.value))}
+        />
+        <ContactList />
+        <ToastContainer />
+      </Box>
+    </Container>
   );
 };

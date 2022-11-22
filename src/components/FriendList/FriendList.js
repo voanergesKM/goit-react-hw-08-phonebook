@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-
-import { StyledList } from './FriendList.styled';
 import { FriendItem } from './FriendItem';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
 import { useEffect } from 'react';
+import { Box } from '@mui/material';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -20,10 +19,10 @@ export const ContactList = () => {
   );
 
   return (
-    <StyledList>
+    <Box as="ul">
       {filteredContacts.map(({ id, name, number }) => (
         <FriendItem key={id} id={id} name={name} number={number} />
       ))}
-    </StyledList>
+    </Box>
   );
 };
