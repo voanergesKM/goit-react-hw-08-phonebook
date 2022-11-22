@@ -7,23 +7,39 @@ import { deleteContact } from 'redux/contacts/contactsOperations';
 import { FriendEditor } from 'components/FriendEdit/FriendEdit';
 import { onDeleteContact } from 'utils/notify';
 
+const style = {
+  color: 'currentColor',
+  '&:hover': {
+    backgroundColor: 'primary.light',
+    color: 'primary.dark',
+  },
+};
+
 export const FriendItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   return (
-    <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <ListItem
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        boxShadow: 4,
+      }}
+    >
       <Box
         sx={{
           width: '550px',
           display: 'flex',
           justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
-        <Typography variant="h5" component="p">
+        <Typography variant="body1" component="p">
           {name}:
         </Typography>
-        <Typography variant="h5" component="span">
+        <Typography variant="body1" component="span">
           {number}
         </Typography>
       </Box>
@@ -32,6 +48,7 @@ export const FriendItem = ({ id, name, number }) => {
           type="button"
           onClick={() => setIsEditOpen(true)}
           color="inherit"
+          sx={style}
         >
           <ModeEdit />
         </IconButton>
@@ -41,7 +58,7 @@ export const FriendItem = ({ id, name, number }) => {
             onDeleteContact(name);
             dispatch(deleteContact(id));
           }}
-          color="inherit"
+          sx={style}
         >
           <PersonRemove />
         </IconButton>
@@ -51,6 +68,7 @@ export const FriendItem = ({ id, name, number }) => {
           id={id}
           name={name}
           number={number}
+          isEditOpen={isEditOpen}
           onToggle={() => setIsEditOpen(false)}
         />
       )}

@@ -19,7 +19,10 @@ export const ContactList = () => {
   );
 
   return (
-    <Box as="ul">
+    <Box
+      as="ul"
+      sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 2 }}
+    >
       {filteredContacts.map(({ id, name, number }) => (
         <FriendItem key={id} id={id} name={name} number={number} />
       ))}

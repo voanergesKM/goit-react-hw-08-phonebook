@@ -1,4 +1,5 @@
 import { Close } from '@mui/icons-material';
+import PropTypes from 'prop-types';
 import { Drawer, IconButton } from '@mui/material';
 
 import { ContactForm } from './ContactForm';
@@ -19,4 +20,9 @@ export const AddContact = ({ isDrawerOpen, closeDrawer }) => {
       <ContactForm />
     </Drawer>
   );
+};
+
+AddContact.propTypes = {
+  isDrawerOpen: PropTypes.bool.isRequired,
+  closeDrawer: PropTypes.func.isRequired,
 };

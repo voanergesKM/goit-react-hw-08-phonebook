@@ -1,9 +1,12 @@
-import { Box, IconButton, Link, Typography } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from 'redux/auth/authOperations';
-import { Link as NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { Link as NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { Box, IconButton, Link, Typography } from '@mui/material';
+import { PersonAdd } from '@mui/icons-material';
+
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logoutUser } from 'redux/auth/authOperations';
 import { AddContact } from 'components/ContactForm/AddContact';
 
 export const UserMenu = () => {
@@ -21,28 +24,64 @@ export const UserMenu = () => {
         width: '100%',
       }}
     >
-      <Box sx={{ display: 'flex', gap: 4 }}>
+      <Box sx={{ display: 'flex', gap: 4, alignItems: 'center' }}>
         <Link
           component={NavLink}
           to={'/contacts'}
-          sx={{ color: 'inherit', textDecoration: 'none' }}
+          sx={{
+            color: 'inherit',
+            textDecoration: 'none',
+            '&:hover': {
+              color: 'secondary.main',
+            },
+          }}
         >
           My Contacts
         </Link>
         <Link
-          sx={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}
+          sx={{
+            color: 'inherit',
+            textDecoration: 'none',
+            cursor: 'pointer',
+            display: { xs: 'none', sm: 'flex' },
+            '&:hover': {
+              color: 'secondary.main',
+            },
+          }}
           onClick={() => setIsDrawerOpen(true)}
         >
           Add Contact
         </Link>
+        <IconButton
+          onClick={() => setIsDrawerOpen(true)}
+          sx={{
+            color: 'inherit',
+            display: { xs: 'flex', sm: 'none' },
+          }}
+        >
+          <PersonAdd />
+        </IconButton>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Typography mr={3} variant="h6" component="span">
+        <Typography
+          mr={3}
+          variant="h6"
+          component="span"
+          sx={{ display: { xs: 'none', sm: 'flex' } }}
+        >
           Welcome, {name}
         </Typography>
 
-        <IconButton onClick={() => dispatch(logoutUser())} color="inherit">
+        <IconButton
+          onClick={() => dispatch(logoutUser())}
+          sx={{
+            color: 'inherit',
+            '&:hover': {
+              color: 'secondary.main',
+            },
+          }}
+        >
           <LogoutIcon />
         </IconButton>
       </Box>

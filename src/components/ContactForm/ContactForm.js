@@ -6,6 +6,7 @@ import { addContact } from 'redux/contacts/contactsOperations';
 import { onExistContact, onSuccesAddContact } from 'utils/notify';
 import { Box, Button, TextField } from '@mui/material';
 import { PersonAdd } from '@mui/icons-material';
+import { Container } from '@mui/system';
 
 const initialValues = {
   name: '',
@@ -43,53 +44,56 @@ export const ContactForm = () => {
   });
 
   return (
-    <Box
-      p={4}
-      my={5}
-      mx="auto"
-      sx={{
-        maxWidth: '400px',
-      }}
-    >
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          id="name"
-          name="name"
-          label="Name"
-          type="name"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-          error={formik.touched.name && Boolean(formik.errors.name)}
-          helperText={formik.touched.name && formik.errors.name}
-          sx={{ mb: 4 }}
-        />
+    <Container>
+      <Box
+        p={4}
+        mt={6}
+        mx="auto"
+        sx={{
+          maxWidth: '400px',
+          boxShadow: 3,
+        }}
+      >
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            id="name"
+            name="name"
+            label="Name"
+            type="name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+            sx={{ mb: 4 }}
+          />
 
-        <TextField
-          fullWidth
-          id="number"
-          name="number"
-          label="Number"
-          type="text"
-          value={formik.values.number}
-          onChange={formik.handleChange}
-          error={formik.touched.number && Boolean(formik.errors.number)}
-          helperText={formik.touched.number && formik.errors.number}
-          sx={{ mb: 4 }}
-        />
+          <TextField
+            fullWidth
+            id="number"
+            name="number"
+            label="Number"
+            type="text"
+            value={formik.values.number}
+            onChange={formik.handleChange}
+            error={formik.touched.number && Boolean(formik.errors.number)}
+            helperText={formik.touched.number && formik.errors.number}
+            sx={{ mb: 4 }}
+          />
 
-        <Button
-          variant="contained"
-          type="submit"
-          endIcon={<PersonAdd />}
-          sx={{
-            display: 'flex',
-            mx: 'auto',
-          }}
-        >
-          Add contact
-        </Button>
-      </form>
-    </Box>
+          <Button
+            variant="contained"
+            type="submit"
+            endIcon={<PersonAdd />}
+            sx={{
+              display: 'flex',
+              mx: 'auto',
+            }}
+          >
+            Add contact
+          </Button>
+        </form>
+      </Box>
+    </Container>
   );
 };

@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import { Container } from '@mui/system';
-import { Box } from 'components/Box';
-import { ContactList } from 'components/FriendList/FriendList';
 import { ToastContainer } from 'react-toastify';
 import { filterChange } from 'redux/filter/filterSlice';
+import { ContactList } from 'components/FriendList/FriendList';
 
 export const Contacts = () => {
   const dispatch = useDispatch();
