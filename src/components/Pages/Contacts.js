@@ -12,12 +12,13 @@ export const Contacts = () => {
 
   return (
     <Container>
-      <Box as={'main'} pt={4} maxWidth="800px" mx="auto">
+      <Box as={'main'} pt={4} maxWidth="700px" mx="auto">
         <TextField
           fullWidth
           type="search"
-          name="filter"
+          label="Search"
           value={value}
+          variant="standard"
           onChange={evt => dispatch(filterChange(evt.currentTarget.value))}
         />
         <ContactList />

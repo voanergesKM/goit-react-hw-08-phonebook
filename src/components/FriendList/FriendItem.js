@@ -12,8 +12,14 @@ export const FriendItem = ({ id, name, number }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   return (
-    <ListItem>
-      <Box maxWidth={'400px'}>
+    <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box
+        sx={{
+          width: '550px',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
         <Typography variant="h5" component="p">
           {name}:
         </Typography>

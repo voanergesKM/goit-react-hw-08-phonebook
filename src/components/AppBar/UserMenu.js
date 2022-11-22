@@ -6,18 +6,6 @@ import { Link as NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { AddContact } from 'components/ContactForm/AddContact';
 
-// const navLinkStyle = {
-//   color: 'text.secondary',
-//   marginRight: 4,
-//   '&:hover': {
-//     color: 'text.primary',
-//   },
-
-//   '&.active': {
-//     color: 'white',
-//   },
-// };
-
 export const UserMenu = () => {
   const name = useSelector(state => state.auth.user.name);
   const dispatch = useDispatch();

@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { ErrorMessage, Form, Formik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { Backdrop } from './FriendEdit.styled';
 import { useDispatch } from 'react-redux';
-import { FormTitle } from 'components/ContactForm/FormTitle';
-import { Input } from 'components/ContactForm/SearchInput.styled';
-import { Button } from 'components/Button/Button';
 import { editContact } from 'redux/contacts/contactsOperations';
+import { Button, TextField } from '@mui/material';
 
 const editRoot = document.querySelector('#edit-root');
 
@@ -27,9 +25,19 @@ export const FriendEditor = ({ onToggle, id, name, number }) => {
     number,
   };
 
-  const schema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     name: Yup.string().required(),
     number: Yup.string().required('No number provided.'),
+  });
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values, actions) => {
+      dispatch(editContact({ id, values }));
+      actions.resetForm();
+      onToggle();
+    },
   });
 
   const handleEscPress = evt => {
@@ -46,27 +54,41 @@ export const FriendEditor = ({ onToggle, id, name, number }) => {
 
   return createPortal(
     <Backdrop onClick={handleBackdropClick}>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values, actions) => {
-          dispatch(editContact({ id, values }));
-          actions.resetForm();
-          onToggle();
-        }}
-        validationSchema={schema}
-      >
-        <Form>
-          <FormTitle title="Name" htmlFor="name">
-            <Input type="text" name="name" />
-            <ErrorMessage name="name" component={Error} />
-          </FormTitle>
-          <FormTitle title="Number" htmlFor="number">
-            <Input type="text" name="number" />
-            <ErrorMessage name="number" component={Error} />
-          </FormTitle>
-          <Button type="submit" text="Edit" />
-        </Form>
-      </Formik>
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          fullWidth
+          id="name"
+          name="name"
+          label="Name"
+          type="text"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          error={formik.touched.name && Boolean(formik.errors.name)}
+          helperText={formik.touched.name && formik.errors.name}
+          sx={{ mb: 4 }}
+        />
+
+        <TextField
+          fullWidth
+          id="number"
+          name="number"
+          label="Number"
+          type="text"
+          value={formik.values.number}
+          onChange={formik.handleChange}
+          error={formik.touched.number && Boolean(formik.errors.number)}
+          helperText={formik.touched.number && formik.errors.number}
+          sx={{ mb: 4 }}
+        />
+
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mx: 'auto', display: 'flex' }}
+        >
+          Edit
+        </Button>
+      </form>
     </Backdrop>,
     editRoot
   );

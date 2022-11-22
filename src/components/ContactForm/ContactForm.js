@@ -70,7 +70,7 @@ export const ContactForm = () => {
           id="number"
           name="number"
           label="Number"
-          type="number"
+          type="text"
           value={formik.values.number}
           onChange={formik.handleChange}
           error={formik.touched.number && Boolean(formik.errors.number)}
