@@ -15,6 +15,7 @@ export const WelcomePage = () => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-around',
+          color: 'text.primary',
         }}
       >
         <Typography variant="h2" component="h1" fontWeight={'800'}>

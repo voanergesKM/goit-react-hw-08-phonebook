@@ -14,6 +14,7 @@ import {
 import { authReducer } from './auth/authSlice';
 import { contactsSlice } from 'redux/contacts/contactsSlice';
 import { filterSlice } from 'redux/filter/filterSlice';
+import { themeSlice } from './Theme/ThemeSlice';
 
 const rootPersistConfig = {
   key: 'user',
@@ -21,10 +22,16 @@ const rootPersistConfig = {
   whitelist: ['token'],
 };
 
+const themePersistedConfig = {
+  key: 'theme',
+  storage,
+};
+
 const rootReducer = combineReducers({
   auth: persistReducer(rootPersistConfig, authReducer),
   contacts: contactsSlice.reducer,
   filter: filterSlice.reducer,
+  theme: persistReducer(themePersistedConfig, themeSlice.reducer),
 });
 
 export const store = configureStore({

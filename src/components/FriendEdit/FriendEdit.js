@@ -86,7 +86,7 @@ export const FriendEditor = ({ onToggle, id, name, number, isEditOpen }) => {
               variant="contained"
               sx={{ mx: 'auto', display: 'flex' }}
             >
-              Edit
+              confirm
             </Button>
           </form>
         </Box>

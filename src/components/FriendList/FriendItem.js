@@ -10,8 +10,8 @@ import { onDeleteContact } from 'utils/notify';
 const style = {
   color: 'currentColor',
   '&:hover': {
-    backgroundColor: 'primary.light',
-    color: 'primary.dark',
+    backgroundColor: 'primary',
+    color: 'text.secondary',
   },
 };
 
@@ -26,6 +26,7 @@ export const FriendItem = ({ id, name, number }) => {
         justifyContent: 'space-between',
         alignItems: 'center',
         boxShadow: 4,
+        backgroundColor: 'divider',
       }}
     >
       <Box
@@ -34,6 +35,7 @@ export const FriendItem = ({ id, name, number }) => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          color: 'text.primary',
         }}
       >
         <Typography variant="body1" component="p">
@@ -43,7 +45,12 @@ export const FriendItem = ({ id, name, number }) => {
           {number}
         </Typography>
       </Box>
-      <Box display="flex">
+      <Box
+        display="flex"
+        sx={{
+          color: 'text.primary',
+        }}
+      >
         <IconButton
           type="button"
           onClick={() => setIsEditOpen(true)}

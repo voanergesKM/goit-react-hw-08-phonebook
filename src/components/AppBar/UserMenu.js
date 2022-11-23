@@ -32,7 +32,7 @@ export const UserMenu = () => {
             color: 'inherit',
             textDecoration: 'none',
             '&:hover': {
-              color: 'secondary.main',
+              color: 'text.secondary',
             },
           }}
         >
@@ -45,7 +45,7 @@ export const UserMenu = () => {
             cursor: 'pointer',
             display: { xs: 'none', sm: 'flex' },
             '&:hover': {
-              color: 'secondary.main',
+              color: 'text.secondary',
             },
           }}
           onClick={() => setIsDrawerOpen(true)}
@@ -78,7 +78,7 @@ export const UserMenu = () => {
           sx={{
             color: 'inherit',
             '&:hover': {
-              color: 'secondary.main',
+              color: 'text.secondary',
             },
           }}
         >
