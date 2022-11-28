@@ -8,13 +8,12 @@ import {
 } from '@mui/material';
 import { AuthNav } from './Auth';
 import { UserMenu } from './UserMenu';
-// import { useContext } from 'react';
 
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { toggleTheme } from 'redux/Theme/ThemeSlice';
 
-export const NavBar = ({ colorModeContext }) => {
+export const NavBar = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
@@ -42,22 +41,19 @@ export const NavBar = ({ colorModeContext }) => {
           MyPhonebook
         </Typography>
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
-        <ThemeToggler colorModeContext={colorModeContext} />
+        <ThemeToggler />
       </Toolbar>
     </AppBar>
   );
 };
 
-function ThemeToggler({ colorModeContext }) {
+function ThemeToggler() {
   const dispatch = useDispatch();
-  // const darkMode = useSelector(state => state.theme.darkMode);
 
   const theme = useTheme();
-  // const colorMode = useContext(colorModeContext);
 
   return (
     <>
-      {/* {theme.palette.mode} mode */}
       <IconButton
         sx={{ ml: 1 }}
         onClick={() => {
@@ -74,5 +70,3 @@ function ThemeToggler({ colorModeContext }) {
     </>
   );
 }
-
-// colorMode.toggleColorMode
